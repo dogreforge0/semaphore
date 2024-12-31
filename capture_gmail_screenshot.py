@@ -1,6 +1,8 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 import time
 
 # Setup Chrome options for headless mode
@@ -23,11 +25,12 @@ try:
     # Sleep for a few seconds to allow the page to fully load
     time.sleep(5)
 
-    # Find all elements on the page and print their full HTML structure
-    elements = driver.find_elements(By.XPATH, "//*")
-    for element in elements:
-        # Print the HTML structure of the element (including its tag, attributes, and inner HTML)
-        html_content = element.get_attribute('outerHTML')
+    # Find all button elements that contain the text "Create account"
+    buttons = driver.find_elements(By.XPATH, "//button[contains(text(), 'Create account')]")
+    
+    # Print the outer HTML for each button with "Create account"
+    for button in buttons:
+        html_content = button.get_attribute('outerHTML')
         print(html_content)
 
     time.sleep(2)
