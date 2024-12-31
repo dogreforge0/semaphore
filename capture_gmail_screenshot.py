@@ -28,7 +28,7 @@ try:
     body = driver.find_element(By.TAG_NAME, "body")
 
     # Send TAB key five times with a delay after each press
-    for _ in range(5):
+    for _ in range(4):
         body.send_keys(Keys.TAB)
         time.sleep(1)  # Delay of 1 second between each TAB key press
 
