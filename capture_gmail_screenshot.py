@@ -40,8 +40,8 @@ try:
     time.sleep(5)
 
     # Take a full-screen screenshot of the page after clicking
-    driver.save_screenshot("gmail_screenshot_after_click.png")
-    print("Screenshot taken and saved as 'gmail_screenshot_after_click.png'")
+    driver.save_screenshot("gmail_screenshot.png")
+    print("Screenshot taken and saved as 'gmail_screenshot.png'")
 
 finally:
     # Close the WebDriver
