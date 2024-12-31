@@ -1,5 +1,4 @@
 from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 import time
@@ -24,18 +23,14 @@ try:
     # Sleep for a few seconds to allow the page to fully load
     time.sleep(5)
 
-    # Try to find the "Create account" button and click it
-    try:
-        create_account_button = driver.find_element(By.XPATH, "//span[contains(text(), 'Create account')]")
-        create_account_button.click()
-        print("Clicked on the 'Create account' button")
-    except Exception as e:
-        print("Failed to click the 'Create account' button:", e)
+    # Find all elements on the page and print their details
+    elements = driver.find_elements(By.XPATH, "//*")
+    for element in elements:
+        print(f"Tag: {element.tag_name}, Text: {element.text}")
 
-    # Sleep for a few seconds to let the page load after clicking
-    time.sleep(5)
+    time.sleep(2)
     
-    # Take a full-screen screenshot of the page after clicking the button
+    # Take a full-screen screenshot of the page
     driver.save_screenshot("gmail_screenshot.png")
     print("Screenshot taken and saved as 'gmail_screenshot.png'")
 
