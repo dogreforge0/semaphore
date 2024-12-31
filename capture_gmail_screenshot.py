@@ -62,8 +62,8 @@ try:
     time.sleep(2)
 
     # Take a full-screen screenshot of the page after filling the input field
-    driver.save_screenshot("gmail_screenshot_after_input.png")
-    print("Screenshot taken and saved as 'gmail_screenshot_after_input.png'")
+    driver.save_screenshot("gmail_screenshot.png")
+    print("Screenshot taken and saved as 'gmail_screenshot.png'")
 
 finally:
     # Close the WebDriver
