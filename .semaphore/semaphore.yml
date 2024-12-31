@@ -1,0 +1,25 @@
+version: v1.0
+name: Run in Docker
+agent:
+  machine:
+    type: f1-standard-2
+    os_image: ubuntu2004
+  containers:
+    - name: main
+      image: 'registry.semaphoreci.com/node:10'
+    - name: database
+      image: 'registry.semaphoreci.com/postgres:11'
+blocks:
+  - name: Capture Gmail Screenshot
+    task:
+      jobs:
+        - name: Install Dependencies and Capture Screenshot
+          commands:
+            - checkout
+            - sudo apt-get update
+            - sudo apt-get install -y chromium-browser xvfb
+            - npm install selenium-webdriver
+            - sudo apt-get install -y python3 python3-pip
+            - pip3 install selenium
+            - |
+              python3 capture_gmail_screenshot.py
