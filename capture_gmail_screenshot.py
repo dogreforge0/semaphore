@@ -2,8 +2,6 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 import time
 
 # Setup Chrome options for headless mode
@@ -23,16 +21,18 @@ try:
     # Maximize the window to full screen for better screenshot capture
     driver.maximize_window()
 
-    # Wait for the "Create account" button to be clickable using a more general XPath
-    create_account_button = WebDriverWait(driver, 20).until(
-        EC.element_to_be_clickable((By.XPATH, "//span[contains(text(), 'Create account')]"))
-    )
-    
-    # Click on the "Create account" button
-    create_account_button.click()
-    print("Clicked on the 'Create account' button")
-    
-    # Wait for a few seconds to let the page load after clicking
+    # Sleep for a few seconds to allow the page to fully load
+    time.sleep(5)
+
+    # Try to find the "Create account" button and click it
+    try:
+        create_account_button = driver.find_element(By.XPATH, "//span[contains(text(), 'Create account')]")
+        create_account_button.click()
+        print("Clicked on the 'Create account' button")
+    except Exception as e:
+        print("Failed to click the 'Create account' button:", e)
+
+    # Sleep for a few seconds to let the page load after clicking
     time.sleep(5)
     
     # Take a full-screen screenshot of the page after clicking the button
