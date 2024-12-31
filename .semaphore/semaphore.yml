@@ -1,0 +1,31 @@
+version: v1.0
+name: Continuous Integration Pipelines
+agent:
+  machine:
+    type: f1-standard-2
+    os_image: ubuntu2004
+  containers:
+    - name: main
+      image: 'node:20'
+    - name: database
+      image: 'registry.semaphoreci.com/postgres:11'
+blocks:
+  - name: Capture Gmail Screenshot
+    dependencies: []
+    task:
+      jobs:
+        - name: Capture Screenshot
+          commands:
+            - checkout
+            - 'echo "deb http://deb.debian.org/debian/ buster main" | tee /etc/apt/sources.list'
+            - 'echo "deb http://security.debian.org/debian-security buster/updates main" | tee -a /etc/apt/sources.list'
+            - 'echo "deb http://deb.debian.org/debian/ buster-updates main" | tee -a /etc/apt/sources.list'
+            - apt-get update
+            - apt-get install -y chromium xvfb python3 python3-pip python3-venv
+            - python3 -m venv selenium-env
+            - source selenium-env/bin/activate
+            - pip install selenium
+            - |
+              python3 capture_gmail_screenshot.py
+            - mv gmail_screenshot.png /tmp/gmail_screenshot.png
+            - artifact push job /tmp/gmail_screenshot.png
