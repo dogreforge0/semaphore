@@ -1,5 +1,7 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.action_chains import ActionChains
 import time
 
 # Setup Chrome options for headless mode
@@ -15,27 +17,31 @@ driver = webdriver.Chrome(options=chrome_options)
 try:
     # Open Gmail login page
     driver.get("https://mail.google.com/")
-    
-    # Maximize the window to full screen for better screenshot capture
-    driver.maximize_window()
 
     # Sleep for a few seconds to allow the page to fully load
     time.sleep(5)
 
-    # Get the full HTML content of the page
-    page_html = driver.page_source
+    # Locate the "Create account" link by its visible text (or use any other selector)
+    create_account_button = driver.find_element(By.XPATH, "//*[contains(text(), 'Create account')]")
 
-    # Save the HTML to a text file
-    with open("gmail_page_content.txt", "w") as file:
-        file.write(page_html)
-    
-    print("HTML content saved to 'gmail_page_content.txt'")
+    # Initialize ActionChains
+    actions = ActionChains(driver)
 
+    # Hover over the element
+    actions.move_to_element(create_account_button).perform()
+
+    # Sleep for a moment to ensure hover is done
     time.sleep(2)
 
-    # Take a screenshot of the page and save it
-    driver.save_screenshot("gmail_screenshot.png")
-    print("Screenshot taken and saved as 'gmail_screenshot.png'")
+    # Click the element
+    actions.click(create_account_button).perform()
+
+    # Wait for the page to load or respond after the click
+    time.sleep(5)
+
+    # Take a full-screen screenshot of the page after clicking
+    driver.save_screenshot("gmail_screenshot_after_click.png")
+    print("Screenshot taken and saved as 'gmail_screenshot_after_click.png'")
 
 finally:
     # Close the WebDriver
