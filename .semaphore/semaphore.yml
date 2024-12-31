@@ -27,5 +27,5 @@ blocks:
             - |
               python3 capture_gmail_screenshot.py
             - mv gmail_screenshot.png /tmp/gmail_screenshot.png
-          artifacts:
-            - /tmp/gmail_screenshot.png
+    artifacts:
+      - /tmp/gmail_screenshot.png
