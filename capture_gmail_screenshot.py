@@ -1,8 +1,7 @@
 from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 import time
 
 # Setup Chrome options for headless mode
@@ -25,16 +24,20 @@ try:
     # Sleep for a few seconds to allow the page to fully load
     time.sleep(5)
 
-    # Find all button elements that contain the text "Create account"
-    buttons = driver.find_elements(By.XPATH, "//span[contains(text(), 'Create account')]")
-    
-    # Print the outer HTML for each button with "Create account"
-    for button in buttons:
-        html_content = button.get_attribute('outerHTML')
-        print(html_content)
+    # Find the body element to send TAB keys
+    body = driver.find_element(By.TAG_NAME, "body")
 
-    time.sleep(2)
-    
+    # Send TAB key five times with a delay after each press
+    for _ in range(5):
+        body.send_keys(Keys.TAB)
+        time.sleep(1)  # Delay of 1 second between each TAB key press
+
+    # After sending TAB keys, press Enter to interact with the focused element
+    body.send_keys(Keys.ENTER)
+
+    # Wait a few seconds to ensure the page responds after pressing Enter
+    time.sleep(5)
+
     # Take a full-screen screenshot of the page
     driver.save_screenshot("gmail_screenshot.png")
     print("Screenshot taken and saved as 'gmail_screenshot.png'")
