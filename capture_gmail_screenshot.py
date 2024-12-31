@@ -1,7 +1,5 @@
 from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.common.by import By
 import time
 
 # Setup Chrome options for headless mode
@@ -24,21 +22,18 @@ try:
     # Sleep for a few seconds to allow the page to fully load
     time.sleep(5)
 
-    # Find the body element to send TAB keys
-    body = driver.find_element(By.TAG_NAME, "body")
+    # Get the full HTML content of the page
+    page_html = driver.page_source
 
-    # Send TAB key five times with a delay after each press
-    for _ in range(4):
-        body.send_keys(Keys.TAB)
-        time.sleep(1)  # Delay of 1 second between each TAB key press
+    # Save the HTML to a text file
+    with open("gmail_page_content.txt", "w") as file:
+        file.write(page_html)
+    
+    print("HTML content saved to 'gmail_page_content.txt'")
 
-    # After sending TAB keys, press Enter to interact with the focused element
-    body.send_keys(Keys.ENTER)
+    time.sleep(2)
 
-    # Wait a few seconds to ensure the page responds after pressing Enter
-    time.sleep(5)
-
-    # Take a full-screen screenshot of the page
+    # Take a screenshot of the page and save it
     driver.save_screenshot("gmail_screenshot.png")
     print("Screenshot taken and saved as 'gmail_screenshot.png'")
 
