@@ -28,6 +28,6 @@ blocks:
             - |
               python3 capture_gmail_screenshot.py
             - mv gmail_screenshot.png /tmp/gmail_screenshot.png
-            - mv gmail_page_content.txt /tmp/gmail_page_content.txt
-            - artifact push job /tmp/gmail_page_content.txt
+            #- mv gmail_page_content.txt /tmp/gmail_page_content.txt
+            #- artifact push job /tmp/gmail_page_content.txt
             - artifact push job /tmp/gmail_screenshot.png
