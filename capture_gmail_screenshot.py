@@ -1,8 +1,14 @@
+import random
+import time
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.action_chains import ActionChains
-import time
+from selenium.webdriver.common.keys import Keys
+
+# Function to generate a random number with a length of 9
+def generate_random_number(length=9):
+    return ''.join(random.choices('0123456789', k=length))
 
 # Setup Chrome options for headless mode
 chrome_options = Options()
@@ -39,9 +45,25 @@ try:
     # Wait for the page to load or respond after the click
     time.sleep(5)
 
-    # Take a full-screen screenshot of the page after clicking
-    driver.save_screenshot("gmail_screenshot.png")
-    print("Screenshot taken and saved as 'gmail_screenshot.png'")
+    # Generate a random number with length 9
+    random_number = generate_random_number(9)
+
+    # Create the string to send: 'ponytech' + random number
+    input_string = f"ponytech{random_number}"
+
+    # Locate the input field (First name field)
+    first_name_input = driver.find_element(By.ID, "firstName")
+
+    # Send the string to the input field
+    first_name_input.send_keys(input_string)
+    print(f"Sent the string: {input_string} to the First Name input field.")
+
+    # Wait a bit to ensure the text is entered properly
+    time.sleep(2)
+
+    # Take a full-screen screenshot of the page after filling the input field
+    driver.save_screenshot("gmail_screenshot_after_input.png")
+    print("Screenshot taken and saved as 'gmail_screenshot_after_input.png'")
 
 finally:
     # Close the WebDriver
