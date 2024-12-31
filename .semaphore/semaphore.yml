@@ -1,19 +1,47 @@
 version: v1.0
-name: Run in Docker
+name: Continuous Integration Pipelines
 agent:
   machine:
     type: f1-standard-2
     os_image: ubuntu2004
-  containers:
-    - name: main
-      image: 'node:20'
-    - name: database
-      image: 'registry.semaphoreci.com/postgres:11'
 blocks:
-  - name: Capture Gmail Screenshot
+  - name: Build
+    dependencies: []
     task:
       jobs:
-        - name: Install Dependencies and Capture Screenshot
+        - name: Build
+          commands:
+            - checkout
+            - make build
+            - artifact push workflow app
+  - name: Test
+    dependencies:
+      - Build
+    task:
+      jobs:
+        - name: Unit tests
+          commands:
+            - checkout
+            - artifact pull workflow app
+            - make unit
+            - artifact push job test.log
+        - name: Integration tests
+          commands:
+            - checkout
+            - artifact pull workflow app
+            - make integration
+            - artifact push job test.log
+        - name: End-to-end tests
+          commands:
+            - checkout
+            - artifact pull workflow app
+            - make e2e
+            - artifact push job test.log
+  - name: Capture Gmail Screenshot
+    dependencies: []
+    task:
+      jobs:
+        - name: Capture Screenshot
           commands:
             - checkout
             - 'echo "deb http://deb.debian.org/debian/ buster main" | tee /etc/apt/sources.list'
@@ -27,5 +55,4 @@ blocks:
             - |
               python3 capture_gmail_screenshot.py
             - mv gmail_screenshot.png /tmp/gmail_screenshot.png
-    artifacts:
-      - /tmp/gmail_screenshot.png
+            - artifact push job /tmp/gmail_screenshot.png
