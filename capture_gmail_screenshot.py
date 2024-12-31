@@ -23,10 +23,12 @@ try:
     # Sleep for a few seconds to allow the page to fully load
     time.sleep(5)
 
-    # Find all elements on the page and print their details
+    # Find all elements on the page and print their full HTML structure
     elements = driver.find_elements(By.XPATH, "//*")
     for element in elements:
-        print(f"Tag: {element.tag_name}, Text: {element.text}")
+        # Print the HTML structure of the element (including its tag, attributes, and inner HTML)
+        html_content = element.get_attribute('outerHTML')
+        print(html_content)
 
     time.sleep(2)
     
