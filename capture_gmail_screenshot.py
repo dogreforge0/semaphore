@@ -23,9 +23,9 @@ try:
     # Maximize the window to full screen for better screenshot capture
     driver.maximize_window()
 
-    # Wait for the "Create account" button to be clickable
-    create_account_button = WebDriverWait(driver, 10).until(
-        EC.element_to_be_clickable((By.XPATH, "//span[text()='Create account']"))
+    # Wait for the "Create account" button to be clickable using a more general XPath
+    create_account_button = WebDriverWait(driver, 20).until(
+        EC.element_to_be_clickable((By.XPATH, "//span[contains(text(), 'Create account')]"))
     )
     
     # Click on the "Create account" button
