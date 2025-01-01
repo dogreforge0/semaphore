@@ -138,11 +138,11 @@ try:
 
         # Locate the "Username" field and input the shuffled username
         username_input = driver.find_element(By.NAME, "Username")
-        time.sleep(2)
+        time.sleep(4)
 
         # Clear any pre-existing value before entering the username
-        username_input.clear()
-        time.sleep(2)
+        #username_input.clear()
+        #time.sleep(2)
 
         # Send the shuffled username to the input field
         username_input.send_keys(shuffled_username)
