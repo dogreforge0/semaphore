@@ -142,7 +142,7 @@ try:
 
         # Clear any pre-existing value before entering the username
         username_input.clear()
-        #time.sleep(2)
+        time.sleep(2)
 
         # Send the shuffled username to the input field
         username_input.send_keys(shuffled_username)
