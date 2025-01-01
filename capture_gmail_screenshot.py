@@ -141,7 +141,7 @@ try:
         time.sleep(4)
 
         # Clear any pre-existing value before entering the username
-        #username_input.clear()
+        username_input.clear()
         #time.sleep(2)
 
         # Send the shuffled username to the input field
