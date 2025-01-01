@@ -19,6 +19,12 @@ def get_random_name_from_file(file_path):
 def generate_random_number(length=9):
     return ''.join(random.choices('0123456789', k=length))
 
+# Function to shuffle characters in a string (username)
+def shuffle_string(s):
+    s_list = list(s)  # Convert string to list of characters
+    random.shuffle(s_list)  # Shuffle the list of characters
+    return ''.join(s_list)  # Convert the shuffled list back to a string
+
 # Setup Chrome options for headless mode
 chrome_options = Options()
 chrome_options.add_argument("--headless")  # Run in headless mode (no GUI)
@@ -124,13 +130,20 @@ try:
         # Generate the username (name + random number)
         username = f"{input_string}{random_number}"
 
-        # Locate the "Username" field and input the generated username
+        # Shuffle the characters of the username
+        shuffled_username = shuffle_string(username)
+
+        # Locate the "Username" field and input the shuffled username
         username_input = driver.find_element(By.NAME, "Username")
         time.sleep(2)
-        username_input.clear()# Clear any pre-existing value
+
+        # Clear any pre-existing value before entering the username
+        username_input.clear()
         time.sleep(2)
-        username_input.send_keys(username)
-        print(f"Entered username: {username} into the 'Username' field.")
+
+        # Send the shuffled username to the input field
+        username_input.send_keys(shuffled_username)
+        print(f"Entered shuffled username: {shuffled_username} into the 'Username' field.")
 
         # Wait a bit to ensure the input is filled
         time.sleep(2)
@@ -155,12 +168,6 @@ try:
         print("Entered password: Jelly90@@@ into the 'Confirm Password' field.")
 
         # Wait a bit to ensure the passwords are entered
-        #time.sleep(2)
-
-        # Click the "Next" button again after entering the password
-        #click_next_button()
-
-        # Wait for a bit to ensure the next step is loaded
         time.sleep(5)
 
         # Take a full-screen screenshot of the page after filling the input fields
