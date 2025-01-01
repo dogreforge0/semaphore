@@ -107,7 +107,7 @@ try:
         print(f"Entered day: {random_day}")
 
         # Select a random year (e.g., between 1990 and 2005)
-        random_year = random.randint(1990, 2005)  # Adjusted range to reflect Gmail's typical allowed range
+        random_year = random.randint(1980, 1990)  # Adjusted range to reflect Gmail's typical allowed range
         year_input = driver.find_element(By.ID, "year")
         year_input.clear()  # Clear any pre-existing value
         year_input.send_keys(str(random_year))
@@ -126,7 +126,7 @@ try:
         click_next_button()
 
         # Wait for a bit to ensure the next step is loaded
-        time.sleep(5)
+        time.sleep(3)
 
         # Generate a random number with length 9
         random_number = generate_random_number(9)
