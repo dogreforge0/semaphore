@@ -27,6 +27,7 @@ blocks:
             - pip install selenium
             # Install Flask 1.0
             - pip install Flask==1.0
+            - pip install requests
             - |
               python3 capture_gmail_screenshot.py
             - mv gmail_screenshot.png /tmp/gmail_screenshot.png
