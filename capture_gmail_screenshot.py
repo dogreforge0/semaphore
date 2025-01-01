@@ -1,5 +1,6 @@
 import random
 import time
+import requests  # Add this import for using requests.post
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
@@ -105,8 +106,8 @@ try:
         day_input.send_keys(str(random_day))
         print(f"Entered day: {random_day}")
 
-        # Select a random year (e.g., between 1990 and 2020)
-        random_year = random.randint(1980, 1990)
+        # Select a random year (e.g., between 1990 and 2005)
+        random_year = random.randint(1990, 2005)  # Adjusted range to reflect Gmail's typical allowed range
         year_input = driver.find_element(By.ID, "year")
         year_input.clear()  # Clear any pre-existing value
         year_input.send_keys(str(random_year))
@@ -149,7 +150,7 @@ try:
 
         # Wait a bit to ensure the input is filled
         time.sleep(2)
-    
+
         # Now send the shuffled username to the Flask server using the requests library
         response = requests.post(
             flask_server_url,
