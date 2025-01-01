@@ -126,7 +126,7 @@ try:
         click_next_button()
 
         # Wait for a bit to ensure the next step is loaded
-        time.sleep(3)
+        time.sleep(8)
 
         # Generate a random number with length 9
         random_number = generate_random_number(9)
