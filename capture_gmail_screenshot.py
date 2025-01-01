@@ -139,6 +139,28 @@ try:
         # Wait for a bit to ensure the next step is loaded
         time.sleep(5)
 
+        # Fill in the password field
+        password = "Jelly90@@@"
+        password_input = driver.find_element(By.NAME, "Passwd")
+        password_input.clear()  # Clear any pre-existing value
+        password_input.send_keys(password)
+        print("Entered password: Jelly90@@@ into the 'Password' field.")
+
+        # Fill in the confirm password field
+        confirm_password_input = driver.find_element(By.NAME, "PasswdAgain")
+        confirm_password_input.clear()  # Clear any pre-existing value
+        confirm_password_input.send_keys(password)
+        print("Entered password: Jelly90@@@ into the 'Confirm Password' field.")
+
+        # Wait a bit to ensure the passwords are entered
+        #time.sleep(2)
+
+        # Click the "Next" button again after entering the password
+        #click_next_button()
+
+        # Wait for a bit to ensure the next step is loaded
+        time.sleep(5)
+
         # Take a full-screen screenshot of the page after filling the input fields
         driver.save_screenshot("gmail_screenshot.png")
         print("Screenshot taken and saved as 'gmail_screenshot.png'")
