@@ -186,6 +186,12 @@ try:
         confirm_password_input.send_keys(password)
         print("Entered password: Jelly90@@@ into the 'Confirm Password' field.")
 
+        # Wait a bit to ensure the input is filled
+        time.sleep(2)
+
+        # Click the "Next" button for the final time (after filling the username)
+        click_next_button()
+
         # Wait a bit to ensure the passwords are entered
         time.sleep(5)
 
