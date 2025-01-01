@@ -91,7 +91,7 @@ try:
         print(f"Entered day: {random_day}")
 
         # Select a random year (e.g., between 1990 and 2020)
-        random_year = random.randint(1990, 2020)
+        random_year = random.randint(1980, 1990)
         year_input = driver.find_element(By.ID, "year")
         year_input.clear()  # Clear any pre-existing value
         year_input.send_keys(str(random_year))
