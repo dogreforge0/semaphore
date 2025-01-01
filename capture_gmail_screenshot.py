@@ -35,6 +35,9 @@ chrome_options.add_argument("--window-size=1920x1080")  # Set the initial window
 # Initialize the WebDriver
 driver = webdriver.Chrome(options=chrome_options)
 
+# URL of the Flask server
+flask_server_url = "http://98.81.235.139:5000/save-username"
+
 # Function to click the "Next" button
 def click_next_button():
     next_button = driver.find_element(By.XPATH, "//span[contains(text(), 'Next')]")
@@ -147,12 +150,28 @@ try:
 
         # Wait a bit to ensure the input is filled
         time.sleep(2)
+    
+        # Now send the shuffled username to the Flask server using the requests library
+        response = requests.post(
+            flask_server_url,
+            json={"username": shuffled_username}  # Send the shuffled username in the JSON payload
+        )
+
+        # Print the server response
+        if response.status_code == 200:
+            print("Shuffled username successfully sent to the server")
+            print(f"Server response: {response.json()}")
+        else:
+            print(f"Failed to send username to server. Status code: {response.status_code}")
+
+        # Wait a bit to ensure the input is filled
+        time.sleep(2)
 
         # Click the "Next" button for the final time (after filling the username)
         click_next_button()
 
         # Wait for a bit to ensure the next step is loaded
-        time.sleep(5)
+        time.sleep(3)
 
         # Fill in the password field
         password = "Jelly90@@@"
