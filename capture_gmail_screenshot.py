@@ -67,10 +67,8 @@ try:
         # Wait a bit to ensure the text is entered properly
         time.sleep(2)
 
-        # Locate the "Next" button using its XPath
+        # Locate and click the "Next" button (after filling in the first name)
         next_button = driver.find_element(By.XPATH, "//span[contains(text(), 'Next')]")
-
-        # Click the "Next" button
         next_button.click()
         print("Clicked the 'Next' button.")
 
@@ -106,7 +104,8 @@ try:
         # Wait a bit to ensure the inputs are properly filled
         time.sleep(2)
 
-        # Click the "Next" button again to move to the next step
+        # Re-locate and click the "Next" button again (after filling in the additional fields)
+        next_button = driver.find_element(By.XPATH, "//span[contains(text(), 'Next')]")
         next_button.click()
         print("Clicked the 'Next' button again.")
 
