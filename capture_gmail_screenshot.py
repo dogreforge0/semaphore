@@ -126,7 +126,9 @@ try:
 
         # Locate the "Username" field and input the generated username
         username_input = driver.find_element(By.NAME, "Username")
-        #username_input.clear()  # Clear any pre-existing value
+        time.sleep(2)
+        username_input.clear()# Clear any pre-existing value
+        time.sleep(2)
         username_input.send_keys(username)
         print(f"Entered username: {username} into the 'Username' field.")
 
