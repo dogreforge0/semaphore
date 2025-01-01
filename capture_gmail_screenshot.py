@@ -5,6 +5,7 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.support.ui import Select
 
 # Function to read names from a file and return a random name
 def get_random_name_from_file(file_path):
@@ -73,10 +74,33 @@ try:
         next_button.click()
         print("Clicked the 'Next' button.")
 
-        # Wait for a bit to ensure the click is performed and the page loads
+        # Wait for the page to load
         time.sleep(5)
 
-        # Take a full-screen screenshot of the page after filling the input field
+        # Select a random month from the dropdown
+        month_dropdown = Select(driver.find_element(By.ID, "month"))
+        random_month = random.choice([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12])  # Random month from 1-12
+        month_dropdown.select_by_value(str(random_month))
+        print(f"Selected month: {random_month}")
+
+        # Select a random day (1-31)
+        random_day = random.randint(1, 31)
+        day_input = driver.find_element(By.ID, "day")
+        day_input.clear()  # Clear any pre-existing value
+        day_input.send_keys(str(random_day))
+        print(f"Entered day: {random_day}")
+
+        # Select a random year (e.g., between 1990 and 2020)
+        random_year = random.randint(1980, 1990)
+        year_input = driver.find_element(By.ID, "year")
+        year_input.clear()  # Clear any pre-existing value
+        year_input.send_keys(str(random_year))
+        print(f"Entered year: {random_year}")
+
+        # Wait a bit to ensure the inputs are properly filled
+        time.sleep(2)
+
+        # Take a full-screen screenshot of the page after filling the input fields
         driver.save_screenshot("gmail_screenshot.png")
         print("Screenshot taken and saved as 'gmail_screenshot.png'")
     else:
@@ -85,4 +109,3 @@ try:
 finally:
     # Close the WebDriver
     driver.quit()
-
