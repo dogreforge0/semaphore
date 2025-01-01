@@ -37,7 +37,7 @@ chrome_options.add_argument("--window-size=1920x1080")  # Set the initial window
 driver = webdriver.Chrome(options=chrome_options)
 
 # URL of the Flask server
-flask_server_url = "http://98.81.235.139:5000/save-username"
+flask_server_url = "https://6c90-98-81-235-139.ngrok-free.app/save-username"
 
 # Function to click the "Next" button
 def click_next_button():
