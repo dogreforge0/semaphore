@@ -61,6 +61,16 @@ try:
     # Wait a bit to ensure the text is entered properly
     time.sleep(2)
 
+    # Locate the "Next" button using its XPath
+    next_button = driver.find_element(By.XPATH, "//span[contains(text(), 'Next')]")
+
+    # Click the "Next" button
+    next_button.click()
+    print("Clicked the 'Next' button.")
+
+    # Wait for a bit to ensure the click is performed and the page loads
+    time.sleep(5)
+
     # Take a full-screen screenshot of the page after filling the input field
     driver.save_screenshot("gmail_screenshot.png")
     print("Screenshot taken and saved as 'gmail_screenshot.png'")
