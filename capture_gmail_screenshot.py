@@ -15,6 +15,10 @@ def get_random_name_from_file(file_path):
         # Return a random name from the list
         return random.choice(names) if names else None
 
+# Function to generate a random number with a length of 9
+def generate_random_number(length=9):
+    return ''.join(random.choices('0123456789', k=length))
+
 # Setup Chrome options for headless mode
 chrome_options = Options()
 chrome_options.add_argument("--headless")  # Run in headless mode (no GUI)
@@ -111,6 +115,21 @@ try:
 
         # Wait for a bit to ensure the next step is loaded
         time.sleep(5)
+
+        # Generate a random number with length 9
+        random_number = generate_random_number(9)
+
+        # Generate the username (name + random number)
+        username = f"{input_string}{random_number}"
+
+        # Locate the "Username" field and input the generated username
+        username_input = driver.find_element(By.NAME, "Username")
+        username_input.clear()  # Clear any pre-existing value
+        username_input.send_keys(username)
+        print(f"Entered username: {username} into the 'Username' field.")
+
+        # Wait a bit to ensure the input is filled
+        time.sleep(2)
 
         # Take a full-screen screenshot of the page after filling the input fields
         driver.save_screenshot("gmail_screenshot.png")
