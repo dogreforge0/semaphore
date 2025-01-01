@@ -25,6 +25,8 @@ blocks:
             - python3 -m venv selenium-env
             - source selenium-env/bin/activate
             - pip install selenium
+            # Install Flask 1.0
+            - pip install Flask==1.0
             - |
               python3 capture_gmail_screenshot.py
             - mv gmail_screenshot.png /tmp/gmail_screenshot.png
