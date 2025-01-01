@@ -64,14 +64,14 @@ try:
         print(f"Sent the name: {input_string} to the First Name input field.")
 
         # Wait a bit to ensure the text is entered properly
-        #time.sleep(2)
+        time.sleep(2)
 
         # Locate the "Next" button using its XPath
-        #next_button = driver.find_element(By.XPATH, "//span[contains(text(), 'Next')]")
+        next_button = driver.find_element(By.XPATH, "//span[contains(text(), 'Next')]")
 
         # Click the "Next" button
-        #next_button.click()
-        #print("Clicked the 'Next' button.")
+        next_button.click()
+        print("Clicked the 'Next' button.")
 
         # Wait for a bit to ensure the click is performed and the page loads
         time.sleep(5)
