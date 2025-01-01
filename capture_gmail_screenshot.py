@@ -29,6 +29,12 @@ chrome_options.add_argument("--window-size=1920x1080")  # Set the initial window
 # Initialize the WebDriver
 driver = webdriver.Chrome(options=chrome_options)
 
+# Function to click the "Next" button
+def click_next_button():
+    next_button = driver.find_element(By.XPATH, "//span[contains(text(), 'Next')]")
+    next_button.click()
+    print("Clicked the 'Next' button.")
+
 try:
     # Open Gmail login page
     driver.get("https://mail.google.com/")
@@ -71,10 +77,8 @@ try:
         # Wait a bit to ensure the text is entered properly
         time.sleep(2)
 
-        # Locate and click the "Next" button (after filling in the first name)
-        next_button = driver.find_element(By.XPATH, "//span[contains(text(), 'Next')]")
-        next_button.click()
-        print("Clicked the 'Next' button.")
+        # Click the "Next" button (after filling in the first name)
+        click_next_button()
 
         # Wait for the page to load
         time.sleep(5)
@@ -108,10 +112,8 @@ try:
         # Wait a bit to ensure the inputs are properly filled
         time.sleep(2)
 
-        # Re-locate and click the "Next" button again (after filling in the additional fields)
-        next_button = driver.find_element(By.XPATH, "//span[contains(text(), 'Next')]")
-        next_button.click()
-        print("Clicked the 'Next' button again.")
+        # Click the "Next" button again (after filling in the additional fields)
+        click_next_button()
 
         # Wait for a bit to ensure the next step is loaded
         time.sleep(5)
@@ -131,10 +133,8 @@ try:
         # Wait a bit to ensure the input is filled
         time.sleep(2)
 
-        # Locate and click the "Next" button once again (after filling the username)
-        next_button = driver.find_element(By.XPATH, "//span[contains(text(), 'Next')]")
-        next_button.click()
-        print("Clicked the 'Next' button for the final time.")
+        # Click the "Next" button for the final time (after filling the username)
+        click_next_button()
 
         # Wait for a bit to ensure the next step is loaded
         time.sleep(5)
