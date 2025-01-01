@@ -131,6 +131,14 @@ try:
         # Wait a bit to ensure the input is filled
         time.sleep(2)
 
+        # Locate and click the "Next" button once again (after filling the username)
+        next_button = driver.find_element(By.XPATH, "//span[contains(text(), 'Next')]")
+        next_button.click()
+        print("Clicked the 'Next' button for the final time.")
+
+        # Wait for a bit to ensure the next step is loaded
+        time.sleep(5)
+
         # Take a full-screen screenshot of the page after filling the input fields
         driver.save_screenshot("gmail_screenshot.png")
         print("Screenshot taken and saved as 'gmail_screenshot.png'")
