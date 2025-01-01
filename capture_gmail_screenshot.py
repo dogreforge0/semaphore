@@ -6,9 +6,13 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.keys import Keys
 
-# Function to generate a random number with a length of 9
-def generate_random_number(length=9):
-    return ''.join(random.choices('0123456789', k=length))
+# Function to read names from a file and return a random name
+def get_random_name_from_file(file_path):
+    with open(file_path, 'r') as file:
+        # Read all lines and remove leading/trailing whitespaces
+        names = [line.strip() for line in file.readlines() if line.strip()]
+        # Return a random name from the list
+        return random.choice(names) if names else None
 
 # Setup Chrome options for headless mode
 chrome_options = Options()
@@ -45,36 +49,40 @@ try:
     # Wait for the page to load or respond after the click
     time.sleep(5)
 
-    # Generate a random number with length 9
-    random_number = generate_random_number(9)
+    # Get a random name from the file 'first-names.txt'
+    random_name = get_random_name_from_file('first-names.txt')
 
-    # Create the string to send: 'ponytech' + random number
-    input_string = f"ponytech{random_number}"
+    if random_name:
+        # Create the input string by adding the random name
+        input_string = random_name
 
-    # Locate the input field (First name field)
-    first_name_input = driver.find_element(By.ID, "firstName")
+        # Locate the input field (First name field)
+        first_name_input = driver.find_element(By.ID, "firstName")
 
-    # Send the string to the input field
-    first_name_input.send_keys(input_string)
-    print(f"Sent the string: {input_string} to the First Name input field.")
+        # Send the name to the input field
+        first_name_input.send_keys(input_string)
+        print(f"Sent the name: {input_string} to the First Name input field.")
 
-    # Wait a bit to ensure the text is entered properly
-    time.sleep(2)
+        # Wait a bit to ensure the text is entered properly
+        #time.sleep(2)
 
-    # Locate the "Next" button using its XPath
-    next_button = driver.find_element(By.XPATH, "//span[contains(text(), 'Next')]")
+        # Locate the "Next" button using its XPath
+        #next_button = driver.find_element(By.XPATH, "//span[contains(text(), 'Next')]")
 
-    # Click the "Next" button
-    next_button.click()
-    print("Clicked the 'Next' button.")
+        # Click the "Next" button
+        #next_button.click()
+        #print("Clicked the 'Next' button.")
 
-    # Wait for a bit to ensure the click is performed and the page loads
-    time.sleep(5)
+        # Wait for a bit to ensure the click is performed and the page loads
+        time.sleep(5)
 
-    # Take a full-screen screenshot of the page after filling the input field
-    driver.save_screenshot("gmail_screenshot.png")
-    print("Screenshot taken and saved as 'gmail_screenshot.png'")
+        # Take a full-screen screenshot of the page after filling the input field
+        driver.save_screenshot("gmail_screenshot.png")
+        print("Screenshot taken and saved as 'gmail_screenshot.png'")
+    else:
+        print("No names found in the file.")
 
 finally:
     # Close the WebDriver
     driver.quit()
+
