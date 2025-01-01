@@ -15,7 +15,7 @@ def get_random_name_from_file(file_path):
         names = [line.strip() for line in file.readlines() if line.strip()]
         # Return a random name from the list
         return random.choice(names) if names else None
-
+ 
 # Function to generate a random number with a length of 9
 def generate_random_number(length=9):
     return ''.join(random.choices('0123456789', k=length))
