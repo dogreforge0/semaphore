@@ -106,6 +106,13 @@ try:
         # Wait a bit to ensure the inputs are properly filled
         time.sleep(2)
 
+        # Click the "Next" button again to move to the next step
+        next_button.click()
+        print("Clicked the 'Next' button again.")
+
+        # Wait for a bit to ensure the next step is loaded
+        time.sleep(5)
+
         # Take a full-screen screenshot of the page after filling the input fields
         driver.save_screenshot("gmail_screenshot.png")
         print("Screenshot taken and saved as 'gmail_screenshot.png'")
