@@ -91,11 +91,17 @@ try:
         print(f"Entered day: {random_day}")
 
         # Select a random year (e.g., between 1990 and 2020)
-        random_year = random.randint(1980, 1990)
+        random_year = random.randint(1990, 2020)
         year_input = driver.find_element(By.ID, "year")
         year_input.clear()  # Clear any pre-existing value
         year_input.send_keys(str(random_year))
         print(f"Entered year: {random_year}")
+
+        # Select a random gender between "Male" and "Female"
+        gender_dropdown = Select(driver.find_element(By.ID, "gender"))
+        random_gender = random.choice([1, 2])  # 1 for Male, 2 for Female
+        gender_dropdown.select_by_value(str(random_gender))
+        print(f"Selected gender: {'Male' if random_gender == 1 else 'Female'}")
 
         # Wait a bit to ensure the inputs are properly filled
         time.sleep(2)
